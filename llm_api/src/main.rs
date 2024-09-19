@@ -1,6 +1,3 @@
-mod utils;
-
-fn main(){
-    let token = utils::generate_token().unwrap();
-    println!("{}", token);
+fn main() {
+    println!("Hello, world!");
 }
