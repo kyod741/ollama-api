@@ -3,10 +3,10 @@ mod utils;
 
 const INFO: &str = "
 Usage
-    help:
-        prints help
-    new:
-        creates a new token and prints it
+    llm_api [command]
+Available Commands:
+    help print help
+    new create a new token and print it
 ";
 
 fn help() -> (){
