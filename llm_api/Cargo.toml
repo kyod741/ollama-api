@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+dotenv = "0.15.0"
 jsonwebtoken = "9.3.0"
 rocket = { version = "0.5.1", features = ["json"] }
 serde = { version = "1.0.210", features = ["derive"] }
