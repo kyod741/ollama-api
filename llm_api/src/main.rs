@@ -1,10 +1,11 @@
-#[macro_use] extern crate rocket;
+#[macro_use]
+extern crate rocket;
 
 pub mod user;
 
 use dotenv::dotenv;
+use rocket::{Build, Rocket};
 use std::env::args;
-use rocket::{Rocket, Build};
 
 const INFO: &str = "
 Usage
@@ -16,28 +17,27 @@ Available Commands:
     launch launches the api
 ";
 
-fn help() -> (){
+fn help() -> () {
     println!("{INFO}");
 }
 
-fn rocket() -> Rocket<Build>{
+fn rocket() -> Rocket<Build> {
     rocket::build().mount("/", routes![user::routers::generate])
 }
 
 #[rocket::main]
-async fn main(){
+async fn main() {
     dotenv().ok();
     let args: Vec<String> = args().collect();
     if args.len() >= 2 && args[1] == "new" {
         let token: String = user::utils::generate_token().unwrap();
         println!("{token}");
-    }else if (args.len() >=2 && args[1] == "help") || args.len() == 1 {
+    } else if (args.len() >= 2 && args[1] == "help") || args.len() == 1 {
         help();
-    }else if args.len() >=2 && args[1] == "launch"{
-        let _ = rocket().launch().await; 
-    }else{
+    } else if args.len() >= 2 && args[1] == "launch" {
+        let _ = rocket().launch().await;
+    } else {
         println!("could not recognize any command");
         help();
     }
 }
-
