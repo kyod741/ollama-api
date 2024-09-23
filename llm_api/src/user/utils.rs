@@ -20,7 +20,7 @@ pub fn generate_token() -> Result<String, jsonwebtoken::errors::Error> {
         .unwrap()
         .as_secs();
     let exp: u64 = iat + expiry_time_in_seconds;
-    let payload: schemes::JWTPayload = schemes::JWTPayload { iat: iat, exp: exp };
+    let payload: schemes::JWTPayload = schemes::JWTPayload { iat, exp };
     let token = encode(
         &header,
         &payload,
@@ -36,7 +36,7 @@ pub fn generate_token() -> Result<String, jsonwebtoken::errors::Error> {
 
 pub fn validate_token(token: &str) -> Result<(), jsonwebtoken::errors::Error> {
     let decoded_token = decode::<schemes::JWTPayload>(
-        &token,
+        token,
         &DecodingKey::from_secret(
             env::var("JWT_SECRET")
                 .expect("JWT_SECRET must be set")

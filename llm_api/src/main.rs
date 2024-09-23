@@ -17,7 +17,7 @@ Available Commands:
     launch launches the api
 ";
 
-fn help() -> () {
+fn help() {
     println!("{INFO}");
 }
 
