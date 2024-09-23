@@ -1,3 +1,4 @@
+use dotenv::dotenv;
 use std::env::args;
 use rocket::{Rocket, Build};
 #[macro_use] extern crate rocket;
@@ -27,6 +28,7 @@ fn rocket() -> Rocket<Build>{
 }
 #[rocket::main]
 async fn main(){
+    dotenv().ok();
     let args: Vec<String> = args().collect();
     if args.len() >= 2 && args[1] == "new" {
         let token: String = new_token();
