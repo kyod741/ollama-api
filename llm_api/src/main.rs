@@ -1,9 +1,10 @@
+#[macro_use] extern crate rocket;
+
+pub mod user;
+
 use dotenv::dotenv;
 use std::env::args;
 use rocket::{Rocket, Build};
-#[macro_use] extern crate rocket;
-mod routers;
-mod utils;
 
 const INFO: &str = "
 Usage
@@ -19,19 +20,16 @@ fn help() -> (){
     println!("{INFO}");
 }
 
-fn new_token() -> String{
-    utils::generate_token().unwrap()
+fn rocket() -> Rocket<Build>{
+    rocket::build().mount("/", routes![user::routers::generate])
 }
 
-fn rocket() -> Rocket<Build>{
-    rocket::build().mount("/", routes![routers::generate])
-}
 #[rocket::main]
 async fn main(){
     dotenv().ok();
     let args: Vec<String> = args().collect();
     if args.len() >= 2 && args[1] == "new" {
-        let token: String = new_token();
+        let token: String = user::utils::generate_token().unwrap();
         println!("{token}");
     }else if (args.len() >=2 && args[1] == "help") || args.len() == 1 {
         help();
