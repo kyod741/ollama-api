@@ -1,4 +1,4 @@
-use crate::user::schemes;
+use crate::user::schemas;
 use jsonwebtoken::{decode, encode, Algorithm, DecodingKey, EncodingKey, Header, Validation};
 use std::env;
 use std::time::{SystemTime, UNIX_EPOCH};
@@ -20,7 +20,7 @@ pub fn generate_token() -> Result<String, jsonwebtoken::errors::Error> {
         .unwrap()
         .as_secs();
     let exp: u64 = iat + expiry_time_in_seconds;
-    let payload: schemes::JWTPayload = schemes::JWTPayload { iat, exp };
+    let payload: schemas::JWTPayload = schemas::JWTPayload { iat, exp };
     let token = encode(
         &header,
         &payload,
@@ -35,7 +35,7 @@ pub fn generate_token() -> Result<String, jsonwebtoken::errors::Error> {
 }
 
 pub fn validate_token(token: &str) -> Result<(), jsonwebtoken::errors::Error> {
-    let decoded_token = decode::<schemes::JWTPayload>(
+    let decoded_token = decode::<schemas::JWTPayload>(
         token,
         &DecodingKey::from_secret(
             env::var("JWT_SECRET")

@@ -1,7 +1,7 @@
 use ::serde::{Deserialize, Serialize};
 
-pub enum format{
-    json
+pub enum Format {
+    Json,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -11,21 +11,17 @@ pub struct JWTPayload {
 }
 
 pub struct CompletionRequest {
-
     pub model: String,
     pub prompt: Option<String>,
     pub suffix: Option<String>,
 
     //these are advanced parameters
-
-    format: Option<format>,
-    options: Option<String>, // todo validate json
-    system: Option<String>,
-    template: Option<String>,
-    context: Option<String>,
-    stream: Option<bool>,
-    raw: Option<bool>,
-    keep_alive: Option<string>,
-
+    pub format: Option<Format>,
+    pub options: Option<String>, // todo validate json
+    pub system: Option<String>,
+    pub template: Option<String>,
+    pub context: Option<String>,
+    pub stream: Option<bool>,
+    pub raw: Option<bool>,
+    pub keep_alive: Option<String>,
 }
-
