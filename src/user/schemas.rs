@@ -27,12 +27,12 @@ pub enum PayloadError {
 
 #[derive(Debug)]
 pub struct CompletionRequestBody {
-    payload: String,
+    pub payload: String,
 }
 
 #[derive(Debug)]
 pub struct CompletionRequestHeaders {
-    token: String,
+    pub token: String,
 }
 
 #[rocket::async_trait]
@@ -43,7 +43,7 @@ impl<'r> FromRequest<'r> for CompletionRequestHeaders {
         if let Some(token) = token_option {
             if token.len() > 6 && &token[0..7] == "Bearer " {
                 let extracted_token = &token[7..];
-                match validate_token(&extracted_token) {
+                match validate_token(extracted_token) {
                     Ok(_) => Outcome::Success(CompletionRequestHeaders {
                         token: extracted_token.to_string(),
                     }),
