@@ -1,13 +1,7 @@
-use rocket::serde::{json::Json, Deserialize};
-
-#[derive(Deserialize, Debug)]
-#[serde(crate = "rocket::serde")]
-pub struct GenerateRequest {
-    model: String,
-    prompt: String,
-}
+use crate::user::schemas::{CompletionRequestHeaders, CompletionRequestBody};
 
 #[get("/", data = "<request>")]
-pub fn generate(request: Json<GenerateRequest>) {
-    println!("model {0:?} \n prompt {1:?}", request.model, request.prompt);
+pub fn completion_request(token: CompletionRequestHeaders, request: CompletionRequestBody) {
+    println!("{request:#?}");
+    println!("{token:#?}");
 }
