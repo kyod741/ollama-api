@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+derive_more = { version = "1.0.0", features = ["from"] }
 dotenv = "0.15.0"
 jsonwebtoken = "9.3.0"
 pre-commit = "0.5.2"
