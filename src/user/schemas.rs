@@ -1,10 +1,10 @@
 use crate::user::utils::validate_token;
 use ::serde::{Deserialize, Serialize};
-use rocket::outcome::Outcome;
 use rocket::data::{self, FromData, ToByteUnit};
-use std::env;
+use rocket::outcome::Outcome;
 use rocket::request::{self, FromRequest};
 use rocket::{http::Status, Data, Request};
+use std::env;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct JWTPayload {
@@ -26,12 +26,12 @@ pub enum PayloadError {
 }
 
 #[derive(Debug)]
-pub struct CompletionRequestBody{
+pub struct CompletionRequestBody {
     payload: String,
 }
 
 #[derive(Debug)]
-pub struct CompletionRequestHeaders{
+pub struct CompletionRequestHeaders {
     token: String,
 }
 
@@ -44,7 +44,9 @@ impl<'r> FromRequest<'r> for CompletionRequestHeaders {
             if token.len() > 6 && &token[0..7] == "Bearer " {
                 let extracted_token = &token[7..];
                 match validate_token(&extracted_token) {
-                    Ok(_) => Outcome::Success(CompletionRequestHeaders{token: extracted_token.to_string()}),
+                    Ok(_) => Outcome::Success(CompletionRequestHeaders {
+                        token: extracted_token.to_string(),
+                    }),
                     Err(_) => Outcome::Error((Status::Unauthorized, JWTTokenError::Invalid)),
                 }
             } else {
@@ -57,7 +59,7 @@ impl<'r> FromRequest<'r> for CompletionRequestHeaders {
 }
 
 #[rocket::async_trait]
-impl<'r> FromData<'r> for CompletionRequestBody{
+impl<'r> FromData<'r> for CompletionRequestBody {
     type Error = PayloadError;
     async fn from_data(_request: &'r Request<'_>, data: Data<'r>) -> data::Outcome<'r, Self> {
         use PayloadError::*;
@@ -67,14 +69,13 @@ impl<'r> FromData<'r> for CompletionRequestBody{
             .parse::<u64>()
             .expect("STRING_SIZE_LIMIT_IN_BYTES must be a valid integer");
 
-        match data
-            .open(size_limit.bytes())
-            .into_string().await {
-                Ok(string) if string.is_complete() => Outcome::Success(CompletionRequestBody{payload: string.into_inner()}),
-                Ok(_) => Outcome::Error((Status::PayloadTooLarge, TooLarge)),
-                Err(e) => Outcome::Error((Status::InternalServerError, Io(e)))
-            }
-        
+        match data.open(size_limit.bytes()).into_string().await {
+            Ok(string) if string.is_complete() => Outcome::Success(CompletionRequestBody {
+                payload: string.into_inner(),
+            }),
+            Ok(_) => Outcome::Error((Status::PayloadTooLarge, TooLarge)),
+            Err(e) => Outcome::Error((Status::InternalServerError, Io(e))),
+        }
     }
 }
 

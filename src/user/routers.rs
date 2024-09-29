@@ -1,4 +1,4 @@
-use crate::user::schemas::{CompletionRequestHeaders, CompletionRequestBody};
+use crate::user::schemas::{CompletionRequestBody, CompletionRequestHeaders};
 
 #[get("/", data = "<request>")]
 pub fn completion_request(token: CompletionRequestHeaders, request: CompletionRequestBody) {
