@@ -30,7 +30,7 @@ pub trait IsCompletionRequestHeaders {}
 pub trait IsCompletionRequestBody {}
 
 #[derive(Debug, From)]
-pub struct CompletionRequestBody(String);
+pub struct CompletionRequestBody(pub String);
 
 #[derive(Debug, From)]
 pub struct CompletionRequestHeaders {
@@ -100,3 +100,9 @@ where
         }
     }
 }
+
+#[derive(Debug)]
+struct CompletionRequestResponse(pub String);
+
+#[derive(Debug)]
+struct ChatCompletionRequestResponse(pub String);
