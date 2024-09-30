@@ -1,6 +1,6 @@
 use crate::user::schemas::{CompletionRequestBody, CompletionRequestHeaders, Wrapper};
 
-#[get("/", data = "<request>")]
+#[post("/completion", data = "<request>")]
 pub fn completion_request(
     token: Wrapper<CompletionRequestHeaders>,
     request: Wrapper<CompletionRequestBody>,
