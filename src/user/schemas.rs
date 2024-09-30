@@ -38,7 +38,7 @@ pub struct CompletionRequestHeaders {
 }
 
 #[derive(Debug, From)]
-pub struct ChatCompletionRequestBody(String);
+pub struct ChatCompletionRequestBody(pub String);
 
 #[derive(Debug, From)]
 pub struct ChatCompletionRequestHeaders {
