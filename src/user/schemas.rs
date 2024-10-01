@@ -2,9 +2,9 @@ use crate::user::utils::validate_token;
 use ::serde::{Deserialize, Serialize};
 use derive_more::From;
 use rocket::data::{self, FromData, ToByteUnit};
+use rocket::http::Status;
 use rocket::outcome::Outcome;
 use rocket::request::{self, FromRequest};
-use rocket::http::{Status};
 use rocket::{Data, Request};
 use std::env;
 
