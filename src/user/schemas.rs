@@ -4,7 +4,8 @@ use derive_more::From;
 use rocket::data::{self, FromData, ToByteUnit};
 use rocket::outcome::Outcome;
 use rocket::request::{self, FromRequest};
-use rocket::{http::Status, Data, Request};
+use rocket::http::{Status};
+use rocket::{Data, Request};
 use std::env;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -100,9 +101,3 @@ where
         }
     }
 }
-
-#[derive(Debug)]
-struct CompletionRequestResponse(pub String);
-
-#[derive(Debug)]
-struct ChatCompletionRequestResponse(pub String);
