@@ -22,7 +22,7 @@ fn help() {
 }
 
 fn rocket() -> Rocket<Build> {
-    rocket::build().mount("/", routes![user::routers::completion_request])
+    rocket::build().mount("/api", routes![user::routers::completion_request, user::routers::chat_completion_request])
 }
 
 #[rocket::main]
