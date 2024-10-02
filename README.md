@@ -2,12 +2,12 @@
 
 ## Usage
 
-### Install Cargo
+### Install Cargo (Linux/MacOs)
 
 ```bash
 curl https://sh.rustup.rs -sSf | sh
 ```
-Windows is not advised to use as an operating system for running the api as it is deeply flawed and not ready for production(or anything), however you can do it at your own risk and find the cargo installation guide online
+Windows is not advised to use as an operating system for running the api as it is deeply flawed and not ready for production(or anything), however you can do it at your own risk and find the cargo installation guide online.
 
 ### Clone the Repository
 
