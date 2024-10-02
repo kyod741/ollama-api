@@ -1,4 +1,3 @@
-```md
 # Ollama API
 
 ## Usage
