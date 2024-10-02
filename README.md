@@ -32,7 +32,7 @@ Add your token to the headers when making requests to the API.
 ```bash
 cargo run new
 ```
-This will show how to use the token.
+This will give you a new token.
 
 ### Using the Binary
 
