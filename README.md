@@ -25,10 +25,6 @@ cargo build --release
 cargo run launch
 ```
 
-### Configuring `.env`
-
-Add your token to the headers when making requests to the API.
-
 ### Generate a New Token
 
 ```bash
